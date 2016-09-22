@@ -1,0 +1,25 @@
+From cdbb94581b6879a7d9da78387ec77c52d425c869 Mon Sep 17 00:00:00 2001
+From: Magicking <syllaur@gmail.com>
+Date: Thu, 22 Sep 2016 18:27:20 +0200
+Subject: [PATCH] Change default jack output to ffmpeg
+
+---
+ SCClassLibrary/Platform/linux/LinuxPlatform.sc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/SCClassLibrary/Platform/linux/LinuxPlatform.sc b/SCClassLibrary/Platform/linux/LinuxPlatform.sc
+index 19566f1..2e3a15d 100644
+--- a/SCClassLibrary/Platform/linux/LinuxPlatform.sc
++++ b/SCClassLibrary/Platform/linux/LinuxPlatform.sc
+@@ -17,7 +17,7 @@ LinuxPlatform : UnixPlatform {
+ 
+ 		// default jack port hookup
+ 		"SC_JACK_DEFAULT_INPUTS".setenv("system");
+-		"SC_JACK_DEFAULT_OUTPUTS".setenv("system");
++		"SC_JACK_DEFAULT_OUTPUTS".setenv("ffmpeg");
+ 
+ 		// automatically start jack when booting the server
+ 		// can still be overridden with JACK_NO_START_SERVER
+-- 
+2.9.3
+

@@ -18,8 +18,12 @@ optdepends=('emacs: emacs interface'
             'screen: vim interface')
 conflicts=('supercollider')
 provides=('supercollider')
-source=("${_name}::git+https://github.com/supercollider/supercollider.git")
-md5sums=('SKIP')
+source=("${_name}::git+https://github.com/supercollider/supercollider.git"
+        "Add-zoom-to-non-ide-Help-Browser.patch"
+        "Change-default-jack-output-to-ffmpeg.patch")
+md5sums=('SKIP'
+         'SKIP'
+         'SKIP')
 install="$_name.install"
 
 pkgver() {
@@ -30,6 +34,8 @@ pkgver() {
 build() {
   cd $srcdir/$_name
   git submodule update --init --recursive .
+  git apply ../../Add-zoom-to-non-ide-Help-Browser.patch
+  git apply ../../Change-default-jack-output-to-ffmpeg.patch
   _carch=$(uname -m)
   Qt5LinguistTools_DIR="/usr/lib/cmake/Qt5LinguistTools"
   [ -d bld ] || mkdir bld && cd bld

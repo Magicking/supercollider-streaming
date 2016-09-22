@@ -1,8 +1,10 @@
 FROM rafaelsoares/archlinux
 
 # Add configuration files
-ADD PKGBUILD /
-ADD supercollider.install /
+ADD PKGBUILD /tmp
+ADD supercollider.install /tmp
+ADD Add-zoom-to-non-ide-Help-Browser.patch /tmp
+ADD Change-default-jack-output-to-ffmpeg.patch /tmp
 ADD authorized_keys /
 
 # Remove default nginx configs.
@@ -13,12 +15,12 @@ RUN echo 'Server = http://mirror.archlinux.ikoula.com/archlinux/$repo/os/$arch' 
                             supervisor && \
     useradd -m makepkg-user && \
     echo 'makepkg-user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers && \
-    cp PKGBUILD supercollider.install /home/makepkg-user && \
-    cd /home/makepkg-user && \
+    cd /tmp && \
     chown makepkg-user:makepkg-user PKGBUILD supercollider.install && \
-    pacman -Sy && sudo -u makepkg-user -- makepkg -i -s --noconfirm && \
+    pacman -Sy && sudo -u makepkg-user -- /bin/sh -c \
+    "cd /tmp; makepkg -i -s --noconfirm" && \
     pacman -Scc --noconfirm && \
-    rm -Rvf /home/makepkg-user/* /var/cache/packman/pkg/*
+    rm -Rvf /tmp/* /var/cache/packman/pkg/*
 
 RUN /usr/bin/ssh-keygen -A && \
     echo 'X11Forwarding yes' >> /etc/ssh/sshd_config && \

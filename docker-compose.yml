@@ -2,3 +2,9 @@ version: '2'
 services:
   sc:
     build: supercollider-arch
+    ports:
+      - "2222:22"
+  front-streamer:
+    build: front-streamer
+    ports:
+      - "2280:80"
