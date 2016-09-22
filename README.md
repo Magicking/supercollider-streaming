@@ -28,7 +28,7 @@ docker-compose -f docker-compose.yml up
 
 * 5 Connect to the container with SuperCollider and launch scvim in tmux
 ```
-ssh -X -p 2222 makepkg-user@127.0.0.1
+ssh -X -p 2222 sc@127.0.0.1
 tmux
 scvim
 ```

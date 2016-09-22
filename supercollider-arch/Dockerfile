@@ -13,20 +13,20 @@ RUN echo 'Server = http://mirror.archlinux.ikoula.com/archlinux/$repo/os/$arch' 
                             fontconfig vim tmux jack2 \
                             openssh xorg-xauth ffmpeg \
                             supervisor && \
-    useradd -m makepkg-user && \
-    echo 'makepkg-user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers && \
+    useradd -m sc && \
+    echo 'sc ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers && \
     cd /tmp && \
-    chown makepkg-user:makepkg-user PKGBUILD supercollider.install && \
-    pacman -Sy && sudo -u makepkg-user -- /bin/sh -c \
+    chown sc:sc PKGBUILD supercollider.install && \
+    pacman -Sy && sudo -u sc -- /bin/sh -c \
     "cd /tmp; makepkg -i -s --noconfirm" && \
     pacman -Scc --noconfirm && \
     rm -Rvf /tmp/* /var/cache/packman/pkg/*
 
 RUN /usr/bin/ssh-keygen -A && \
     echo 'X11Forwarding yes' >> /etc/ssh/sshd_config && \
-    mkdir /home/makepkg-user/.ssh && \
-    cp -v /authorized_keys /home/makepkg-user/.ssh && \
-    chown -R makepkg-user:makepkg-user /home/makepkg-user/.ssh
+    mkdir /home/sc/.ssh && \
+    cp -v /authorized_keys /home/sc/.ssh && \
+    chown -R sc:sc /home/sc/.ssh
 
 COPY supervisord.ini /etc/supervisor.d/supervisord.ini
 
