@@ -1,4 +1,4 @@
-Usage:
+Usage
 -----
 
 * 1 Clone this repository and enter it
@@ -56,7 +56,7 @@ ffplay http://127.0.0.1:2280/live/sc.m3u8
  * No windows (meters, help browser, ...)
  * No help file (available at http://doc.sccode.org/)
 
-TODO:
+TODO
 ----
 
 See TODO file

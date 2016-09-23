@@ -1,0 +1,38 @@
+From c58a0f1f3ca24a04533113765ef503916aab918e Mon Sep 17 00:00:00 2001
+From: Your Name <you@example.com>
+Date: Fri, 23 Sep 2016 01:43:49 +0000
+Subject: [PATCH] Change /bin/login to /usr/bin/bash
+
+---
+ app.js | 13 +++----------
+ 1 file changed, 3 insertions(+), 10 deletions(-)
+
+diff --git a/app.js b/app.js
+index d00e6a4..ad91a90 100644
+--- a/app.js
++++ b/app.js
+@@ -102,19 +102,12 @@ io.on('connection', function(socket){
+     }
+ 
+     var term;
+-    if (process.getuid() == 0) {
+-        term = pty.spawn('/bin/login', [], {
++    term = pty.spawn('/usr/bin/bash', ['-l'], {
+             name: 'xterm-256color',
+             cols: 80,
+             rows: 30
+-        });
+-    } else {
+-        term = pty.spawn('ssh', [sshuser + sshhost, '-p', sshport, '-o', 'PreferredAuthentications=' + sshauth], {
+-            name: 'xterm-256color',
+-            cols: 80,
+-            rows: 30
+-        });
+-    }
++    });
++
+     console.log((new Date()) + " PID=" + term.pid + " STARTED on behalf of user=" + sshuser)
+     term.on('data', function(data) {
+         socket.emit('output', data);
+-- 
+2.10.0
