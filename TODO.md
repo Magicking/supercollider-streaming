@@ -1,7 +1,7 @@
  * Empty cache from streamer
  * Check security
  * Use web term like wetty to have scvim + tmux
- * Build without QT
+ * Build without QT (see https://github.com/supercollider/supercollider/issues/1736 )
  * Change authorized_keys file to an other auth system
  * Change username
  * Reduce delay

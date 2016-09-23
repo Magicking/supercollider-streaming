@@ -12,7 +12,7 @@ RUN echo 'Server = http://mirror.archlinux.ikoula.com/archlinux/$repo/os/$arch' 
     pacman -Syu --noconfirm binutils git sudo mesa-libgl \
                             fontconfig vim tmux jack2 \
                             openssh xorg-xauth ffmpeg \
-                            supervisor && \
+                            supervisor xorg-server-xvfb && \
     useradd -m sc && \
     echo 'sc ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers && \
     cd /tmp && \
@@ -23,6 +23,9 @@ RUN echo 'Server = http://mirror.archlinux.ikoula.com/archlinux/$repo/os/$arch' 
     rm -Rvf /tmp/* /var/cache/packman/pkg/*
 
 RUN /usr/bin/ssh-keygen -A && \
+    echo '[ -z ${DISPLAY+x} ] && export DISPLAY=:0' >> /home/sc/.bashrc && \
+    echo '[ -z ${TMUX+x} ] && tmux' >> /home/sc/.bashrc && \
+    echo 'while [ -z ${TMUX+x} ]; do tmux attach || exit ; done' >> /home/sc/.bashrc && \
     echo 'X11Forwarding yes' >> /etc/ssh/sshd_config && \
     mkdir /home/sc/.ssh && \
     cp -v /authorized_keys /home/sc/.ssh && \

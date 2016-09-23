@@ -26,20 +26,19 @@ docker-compose -f docker-compose.yml build
 docker-compose -f docker-compose.yml up
 ```
 
-* 5 Connect to the container with SuperCollider and launch scvim in tmux
+* 5 Connect to the container with SuperCollider and launch scvim (tmux is started automatically see ~sc/.bashrc)
 ```
-ssh -X -p 2222 sc@127.0.0.1
-tmux
+ssh -p 2222 sc@127.0.0.1
 scvim
 ```
 
-* 6 Start servers Make some sounds
+* 6 Start servers and make some sound
 ```
 s.boot // F6 to boot server
-{SinOsc.ar(440)}.play // F6 start sound
+{SinOsc.ar(440)}.play // F6 to make sin wave at 440hz
 ```
 
-* 7 Listen to the sounds using the URL http://127.0.0.1:2280/live/sc.m3u8
+* 7 Listen to using the URL http://127.0.0.1:2280/live/sc.m3u8
 ```
 vlc http://127.0.0.1:2280/live/sc.m3u8
 # or

@@ -4,6 +4,8 @@ services:
     build: supercollider-arch
     ports:
       - "2222:22"
+    depends_on:
+      - front-streamer
   front-streamer:
     build: front-streamer
     ports:
