@@ -12,7 +12,7 @@ RUN echo 'Server = http://mirror.archlinux.ikoula.com/archlinux/$repo/os/$arch' 
     pacman -Syu --noconfirm binutils git sudo mesa-libgl \
                             fontconfig vim tmux jack2 \
                             openssh xorg-xauth ffmpeg \
-                            supervisor xorg-server-xvfb && \
+                            supervisor xorg-server-xvfb npm && \
     useradd -m sc && \
     echo 'sc ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers && \
     cd /tmp && \
@@ -22,6 +22,8 @@ RUN echo 'Server = http://mirror.archlinux.ikoula.com/archlinux/$repo/os/$arch' 
     pacman -Scc --noconfirm && \
     rm -Rvf /tmp/* /var/cache/packman/pkg/*
 
+ADD Change-bin-login-to-usr-bin-bash.patch /tmp
+
 RUN /usr/bin/ssh-keygen -A && \
     echo '[ -z ${DISPLAY+x} ] && export DISPLAY=:0' >> /home/sc/.bashrc && \
     echo '[ -z ${TMUX+x} ] && tmux' >> /home/sc/.bashrc && \
@@ -29,10 +31,18 @@ RUN /usr/bin/ssh-keygen -A && \
     echo 'X11Forwarding yes' >> /etc/ssh/sshd_config && \
     mkdir /home/sc/.ssh && \
     cp -v /authorized_keys /home/sc/.ssh && \
-    chown -R sc:sc /home/sc/.ssh
+    chown -R sc:sc /home/sc/.ssh && \
+    sudo -u sc git clone https://github.com/krishnasrinivas/wetty /tmp/wetty && \
+    cd /tmp/wetty && \
+    git apply /tmp/Change-bin-login-to-usr-bin-bash.patch && \
+    sudo -u sc npm install && \
+    cd / && \
+    mv /tmp/wetty /usr/local && \
+    chown -R root:root /usr/local/wetty && \
+    rm -Rvf /tmp/*
 
-COPY supervisord.ini /etc/supervisor.d/supervisord.ini
+ADD supervisord.ini /etc/supervisor.d/supervisord.ini
 
-EXPOSE 22 80
+EXPOSE 22 80 3000
 
 ENTRYPOINT ["/usr/bin/supervisord"]
