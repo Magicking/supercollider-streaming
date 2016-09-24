@@ -1,3 +1,9 @@
+SuperCollider + ffmpeg + nginx
+------------------------------
+General information: TODO
+
+![SCS](/sc_streaming.jpg?raw=true)
+
 Usage
 -----
 
