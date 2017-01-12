@@ -9,7 +9,7 @@ Usage
 
 * 1 Clone this repository and enter it
 ```
-git clone https://github.com/magicking/supercollider-streaming
+git clone --recursive https://github.com/magicking/supercollider-streaming
 cd supercollider-streaming
 ```
 

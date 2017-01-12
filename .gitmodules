@@ -1,0 +1,6 @@
+[submodule "supercollider-arch/supercollider"]
+	path = supercollider-arch/supercollider
+	url = https://github.com/supercollider/supercollider.git
+[submodule "supercollider-arch/wetty"]
+	path = supercollider-arch/wetty
+	url = https://github.com/krishnasrinivas/wetty

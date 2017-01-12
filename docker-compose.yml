@@ -3,8 +3,10 @@ services:
   sc:
     build: supercollider-arch
     ports:
-      - "2222:22"
+      - "0.0.0.0:2222:22"
   front-streamer:
     build: front-streamer
     ports:
-      - "2280:80"
+      - "0.0.0.0:2280:80"
+    links:
+      - sc
