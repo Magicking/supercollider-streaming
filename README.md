@@ -30,7 +30,7 @@ docker-compose -f docker-compose.yml build
 docker-compose -f docker-compose.yml up
 ```
 
-* 5 Connect to wetty term at http://127.0.0.1:3000/wetty with your browser
+* 5 Connect to wetty term at http://127.0.0.1:2280/wetty with your browser
 
 * (OPTIONAL) 5 Connect to the container with SuperCollider using SSH, see ***2***
 ```
