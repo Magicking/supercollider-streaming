@@ -1,0 +1,12 @@
+diff --git a/scvimrc b/scvimrc
+index e237522..86bb9e7 100644
+--- a/scvimrc
++++ b/scvimrc
+@@ -29,7 +29,6 @@ if g:sclangTerm == ""
+     endfor
+   endif
+   if g:sclangTerm == ""
+-    echo "scvimrc warning: unable to detect terminal program, hoping xterm exists"
+     let g:sclangTerm = "xterm -e"
+   endif
+ endif

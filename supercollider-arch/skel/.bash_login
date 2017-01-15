@@ -1,0 +1,3 @@
+[ -z ${DISPLAY+x} ] && export DISPLAY=:0
+[ -z ${TMUX+x} ] && tmux
+while [ -z ${TMUX+x} ]; do tmux attach || exit ; done
